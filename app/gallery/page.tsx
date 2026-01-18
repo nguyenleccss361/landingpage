@@ -9,19 +9,19 @@ export const metadata = {
 
 export default function GalleryPage() {
   return (
-    <>
-      <main className="w-full max-w-full overflow-x-hidden">
-        <Header />
-        <section className="section bg-[var(--theme-4)]">
-          <div className="container">
-            <h1 className="text-center mb-12 text-2xl md:text-3xl lg:text-4xl font-bold max-w-4xl mx-auto">
+    <div className="min-h-screen flex flex-col">
+      <Header />
+      <main className="flex-1">
+        <section className="py-24 bg-muted/50">
+          <div className="container px-4">
+            <h1 className="text-center mb-12 text-3xl md:text-4xl lg:text-5xl font-bold max-w-4xl mx-auto">
               A world filled with endless opportunities and endless potential for you to explore.
             </h1>
           </div>
         </section>
         <Gallery />
-        <Footer />
       </main>
-    </>
+      <Footer />
+    </div>
   );
 }

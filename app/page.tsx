@@ -6,7 +6,7 @@ import Gallery from "@/components/Gallery";
 import EventSchedule from "@/components/EventSchedule";
 import ContactForm from "@/components/ContactForm";
 import Footer from "@/components/Footer";
-import Chatbot from "@/components/Chatbot";
+import TawkTo from "@/components/TawkTo";
 
 export default function Home() {
   const structuredData = {
@@ -123,17 +123,19 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(eventData) }}
       />
-      <main className="w-full max-w-full overflow-x-hidden">
+      <div className="min-h-screen flex flex-col w-full overflow-x-hidden">
         <Header />
-        <Hero />
-        <EventSection />
-        <ProductSection />
-        <Gallery />
-        <EventSchedule />
-        <ContactForm />
+        <main className="flex-1 w-full overflow-x-hidden">
+          <Hero />
+          <EventSection />
+          <ProductSection />
+          <Gallery />
+          <EventSchedule />
+          <ContactForm />
+        </main>
         <Footer />
-      </main>
-      <Chatbot />
+      </div>
+      <TawkTo />
     </>
   );
 }

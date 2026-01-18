@@ -1,78 +1,134 @@
 import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { CheckCircle2, ShoppingCart } from "lucide-react";
 
 export default function ProductSection() {
+  const features = [
+    "Reinforced Deck: Eco-friendly bamboo and maple for strength.",
+    "Precision Trucks: Smooth turns and superior control.",
+    "Advanced Wheels: Shock-absorbing for all terrains.",
+    "Custom Graphics: Unique urban art designs.",
+    "Lightweight Build: Durable and portable.",
+  ];
+
   return (
-    <section id="products" className="section bg-[var(--theme-1)]">
-      <div className="container">
-        <h2 className="text-center mb-8 md:mb-12 text-2xl md:text-3xl lg:text-4xl font-bold leading-tight">
-          <strong>Raptor X: Unleash Your Urban Adventure</strong>
-        </h2>
-        <div className="grid md:grid-cols-[1fr_1.4fr] gap-8 md:gap-12 items-start">
-          <div className="space-y-6 order-2 md:order-1">
-            <div className="relative aspect-square rounded-xl overflow-hidden shadow-xl">
-              <Image
-                src="/images/products/product-20-off.webp"
-                alt="20% OFF Raptor X"
-                fill
-                className="object-cover"
-                loading="lazy"
-                sizes="(max-width: 768px) 100vw, 40vw"
-                quality={90}
-              />
-            </div>
-            <div className="space-y-4 text-center md:text-left">
-              <p className="text-base md:text-lg leading-relaxed">
-                Elevate your skateboarding with the <strong>Raptor X</strong>, <strong>a limited-edition skateboard built for thrill-seekers</strong>. Order now to get <strong className="text-[var(--theme-5)]">20% off</strong> ONLY <strong className="text-[var(--theme-5)] text-xl md:text-2xl">£177</strong> and an <strong>exclusive gift!</strong>
-              </p>
-            </div>
-            <div className="relative aspect-[3/4] max-w-md mx-auto md:mx-0 rounded-xl overflow-hidden shadow-xl">
-              <Image
-                src="/images/products/product-01.webp"
-                alt="Raptor X 01"
-                fill
-                className="object-cover"
-                loading="lazy"
-                sizes="(max-width: 768px) 100vw, 40vw"
-                quality={90}
-              />
-            </div>
-            <p className="text-center md:text-left font-semibold text-base md:text-lg">
-              <strong>Raptor X 01</strong>
-            </p>
-          </div>
-          <div className="space-y-6 order-1 md:order-2">
-            <div className="bg-[var(--theme-4)] p-6 md:p-8 rounded-xl shadow-lg border border-[var(--theme-3)]">
-              <h3 className="text-xl md:text-2xl mb-6 font-bold text-[var(--theme-5)]">Features:</h3>
-              <ol className="list-decimal list-inside space-y-3 md:space-y-4 text-base md:text-lg leading-relaxed">
-                <li className="mb-2"><strong>Reinforced Deck</strong>: Eco-friendly bamboo and maple for strength.</li>
-                <li className="mb-2"><strong>Precision Trucks</strong>: Smooth turns and superior control.</li>
-                <li className="mb-2"><strong>Advanced Wheels</strong>: Shock-absorbing for all terrains.</li>
-                <li className="mb-2"><strong>Custom Graphics</strong>: Unique urban art designs.</li>
-                <li className="mb-2"><strong>Lightweight Build</strong>: Durable and portable.</li>
-              </ol>
-            </div>
-            <div className="space-y-4">
-              <p className="text-base md:text-lg leading-relaxed">
-                Ride in style and performance with the <strong>Raptor X</strong>—your perfect skateboard for urban adventures. <strong className="text-[var(--theme-5)]">Limited edition</strong>—get yours today!
-              </p>
-              <div className="flex justify-center md:justify-start pt-2">
-                <button className="btn">Order Now</button>
+    <section id="products" className="py-24 bg-muted/50">
+      <div className="container px-4">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
+            Raptor X: Unleash Your Urban Adventure
+          </h2>
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            Elevate your skateboarding with the <strong>Raptor X</strong>, a limited-edition skateboard built for thrill-seekers.
+          </p>
+        </div>
+
+        {/* Pricing Banner */}
+        <Card className="mb-12 border-primary/20 bg-primary/5">
+          <CardContent className="pt-6">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+              <div className="text-center md:text-left">
+                <p className="text-sm text-muted-foreground mb-2">Limited Time Offer</p>
+                <div className="flex items-baseline gap-2 justify-center md:justify-start">
+                  <span className="text-4xl md:text-5xl font-bold text-primary">£177</span>
+                  <span className="text-xl text-muted-foreground line-through">£221</span>
+                </div>
+                <p className="text-sm text-muted-foreground mt-2">
+                  <strong className="text-primary">20% OFF</strong> + Exclusive Gift Included
+                </p>
               </div>
+              <Button size="lg" className="w-full md:w-auto">
+                <ShoppingCart className="mr-2 h-5 w-5" />
+                Order Now
+              </Button>
             </div>
-            <div className="relative aspect-[3/4] max-w-md mx-auto rounded-xl overflow-hidden shadow-xl">
-              <Image
-                src="/images/products/product-02.webp"
-                alt="Raptor X 02"
-                fill
-                className="object-cover"
-                loading="lazy"
-                sizes="(max-width: 768px) 100vw, 50vw"
-                quality={90}
-              />
+          </CardContent>
+        </Card>
+
+        {/* Main Content Grid */}
+        <div className="grid md:grid-cols-2 gap-8 lg:gap-12 mb-12">
+          {/* Left Column - Product Images */}
+          <div className="space-y-6">
+            <Card className="overflow-hidden p-0">
+              <div className="relative aspect-square">
+                <Image
+                  src="/images/products/product-20-off.webp"
+                  alt="20% OFF Raptor X"
+                  fill
+                  className="object-cover"
+                  loading="lazy"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  quality={75}
+                />
+              </div>
+            </Card>
+            <div className="grid grid-cols-2 gap-4">
+              <Card className="overflow-hidden p-0">
+                <div className="relative aspect-[3/4]">
+                  <Image
+                    src="/images/products/product-01.webp"
+                    alt="Raptor X 01"
+                    fill
+                    className="object-cover"
+                    loading="lazy"
+                    sizes="(max-width: 768px) 50vw, 25vw"
+                    quality={75}
+                  />
+                </div>
+                <div className="p-4 text-center">
+                  <p className="font-semibold">Raptor X 01</p>
+                </div>
+              </Card>
+              <Card className="overflow-hidden p-0">
+                <div className="relative aspect-[3/4]">
+                  <Image
+                    src="/images/products/product-02.webp"
+                    alt="Raptor X 02"
+                    fill
+                    className="object-cover"
+                    loading="lazy"
+                    sizes="(max-width: 768px) 50vw, 25vw"
+                    quality={75}
+                  />
+                </div>
+                <div className="p-4 text-center">
+                  <p className="font-semibold">Raptor X 02</p>
+                </div>
+              </Card>
             </div>
-            <p className="text-center font-semibold text-base md:text-lg">
-              <strong>Raptor X 02</strong>
-            </p>
+          </div>
+
+          {/* Right Column - Features */}
+          <div className="space-y-6">
+            <Card>
+              <CardHeader>
+                <CardTitle>Premium Features</CardTitle>
+                <CardDescription>Built for performance and style</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <ul className="space-y-4">
+                  {features.map((feature, idx) => (
+                    <li key={idx} className="flex items-start gap-3">
+                      <CheckCircle2 className="h-5 w-5 mt-0.5 text-primary flex-shrink-0" />
+                      <span className="leading-relaxed text-muted-foreground">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <CardTitle>Why Choose Raptor X?</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-muted-foreground leading-relaxed">
+                  Ride in style and performance with the <strong className="text-foreground">Raptor X</strong>—your perfect skateboard for urban adventures. 
+                  <strong className="text-primary"> Limited edition</strong>—get yours today!
+                </p>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </div>

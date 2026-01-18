@@ -1,6 +1,13 @@
 "use client";
 
 import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { CheckCircle2 } from "lucide-react";
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
@@ -16,14 +23,13 @@ export default function ContactForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    // Simulate form submission
     await new Promise((resolve) => setTimeout(resolve, 1000));
     setIsSubmitting(false);
     setSubmitted(true);
   };
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     setFormData({
       ...formData,
@@ -33,105 +39,105 @@ export default function ContactForm() {
 
   if (submitted) {
     return (
-      <section id="register" className="section bg-[var(--theme-4)]">
-        <div className="container max-w-2xl">
-          <div className="bg-[var(--theme-3)] p-8 rounded-lg text-center">
-            <h2 className="text-2xl mb-4">Thank you for your response. ✨</h2>
-            <p>We&apos;ll be in touch soon!</p>
-          </div>
+      <section id="register" className="py-24 bg-background">
+        <div className="container px-4 max-w-2xl">
+          <Card className="border-primary">
+            <CardContent className="pt-6 text-center">
+              <CheckCircle2 className="h-16 w-16 text-primary mx-auto mb-4" />
+              <h2 className="text-2xl font-bold mb-2">Thank you for your response. ✨</h2>
+              <p className="text-muted-foreground">We&apos;ll be in touch soon!</p>
+            </CardContent>
+          </Card>
         </div>
       </section>
     );
   }
 
   return (
-    <section id="register" className="section bg-[var(--theme-4)]">
-      <div className="container max-w-2xl">
-        <h2 className="text-center mb-8 text-3xl md:text-4xl font-bold">REGISTER HERE!</h2>
-        <form onSubmit={handleSubmit} className="space-y-6 bg-[var(--theme-1)] p-6 md:p-8 rounded-xl shadow-lg">
-          <div>
-            <label htmlFor="name" className="block mb-2 font-medium">
-              Name <span className="text-red-600">(required)</span>
-            </label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              required
-              value={formData.name}
-              onChange={handleChange}
-              className="w-full"
-            />
-          </div>
-          <div>
-            <label htmlFor="email" className="block mb-2 font-medium">
-              Email <span className="text-red-600">(required)</span>
-            </label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              required
-              value={formData.email}
-              onChange={handleChange}
-              className="w-full"
-            />
-          </div>
-          <div>
-            <label htmlFor="phone" className="block mb-2 font-medium">
-              Phone
-            </label>
-            <input
-              type="tel"
-              id="phone"
-              name="phone"
-              value={formData.phone}
-              onChange={handleChange}
-              className="w-full"
-            />
-          </div>
-          <div>
-            <label htmlFor="source" className="block mb-2 font-medium">
-              How did you hear about us?
-            </label>
-            <select
-              id="source"
-              name="source"
-              value={formData.source}
-              onChange={handleChange}
-              className="w-full"
-            >
-              <option value="">Select one option</option>
-              <option value="Search Engine">Search Engine</option>
-              <option value="Social Media">Social Media</option>
-              <option value="TV">TV</option>
-              <option value="Radio">Radio</option>
-              <option value="Friend or Family">Friend or Family</option>
-            </select>
-          </div>
-          <div>
-            <label htmlFor="details" className="block mb-2 font-medium">
-              Other Details
-            </label>
-            <textarea
-              id="details"
-              name="details"
-              rows={6}
-              value={formData.details}
-              onChange={handleChange}
-              className="w-full"
-            />
-          </div>
-          <div className="flex justify-center pt-4">
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              className="btn disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              {isSubmitting ? "Sending..." : "Send"}
-            </button>
-          </div>
-        </form>
+    <section id="register" className="py-24 bg-background">
+      <div className="container px-4 max-w-2xl">
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-3xl md:text-4xl text-center">REGISTER HERE!</CardTitle>
+            <CardDescription className="text-center">
+              Join us for the Raptor Roadshow 2025
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div className="space-y-2">
+                <Label htmlFor="name">
+                  Name <span className="text-destructive">(required)</span>
+                </Label>
+                <Input
+                  id="name"
+                  name="name"
+                  required
+                  value={formData.name}
+                  onChange={handleChange}
+                  placeholder="Your name"
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="email">
+                  Email <span className="text-destructive">(required)</span>
+                </Label>
+                <Input
+                  id="email"
+                  name="email"
+                  type="email"
+                  required
+                  value={formData.email}
+                  onChange={handleChange}
+                  placeholder="your.email@example.com"
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="phone">Phone</Label>
+                <Input
+                  id="phone"
+                  name="phone"
+                  type="tel"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  placeholder="+44 20 7946 0958"
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="source">How did you hear about us?</Label>
+                <Select
+                  value={formData.source}
+                  onValueChange={(value) => setFormData({ ...formData, source: value })}
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select one option" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="Search Engine">Search Engine</SelectItem>
+                    <SelectItem value="Social Media">Social Media</SelectItem>
+                    <SelectItem value="TV">TV</SelectItem>
+                    <SelectItem value="Radio">Radio</SelectItem>
+                    <SelectItem value="Friend or Family">Friend or Family</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="details">Other Details</Label>
+                <Textarea
+                  id="details"
+                  name="details"
+                  rows={6}
+                  value={formData.details}
+                  onChange={handleChange}
+                  placeholder="Tell us more about yourself..."
+                />
+              </div>
+              <Button type="submit" size="lg" className="w-full" disabled={isSubmitting}>
+                {isSubmitting ? "Sending..." : "Send"}
+              </Button>
+            </form>
+          </CardContent>
+        </Card>
       </div>
     </section>
   );

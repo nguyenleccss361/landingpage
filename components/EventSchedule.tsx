@@ -1,5 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Calendar, Clock, MapPin } from "lucide-react";
 
 const events = [
   {
@@ -71,51 +74,65 @@ const events = [
 
 export default function EventSchedule() {
   return (
-    <section id="schedule" className="section bg-[var(--theme-1)]">
-      <div className="container">
-        <h2 className="text-center mb-12 text-2xl md:text-3xl lg:text-4xl">
+    <section id="schedule" className="py-24 bg-muted/50">
+      <div className="container px-4">
+        <h2 className="text-center mb-12 text-3xl md:text-4xl lg:text-5xl font-bold">
           Event Schedule Raptor Roadshow 2025: The Ultimate Skateboarding Experience
         </h2>
-        <div className="space-y-12 md:space-y-16">
+        <div className="space-y-12">
           {events.map((event, index) => (
             <div
               key={event.location}
-              className={`grid md:grid-cols-2 gap-6 md:gap-8 items-center ${
+              className={`grid md:grid-cols-2 gap-8 items-center ${
                 index % 2 === 1 ? "md:flex-row-reverse" : ""
               }`}
             >
-              <div className={`space-y-4 p-6 md:p-8 rounded-xl shadow-lg ${
-                index % 2 === 0 
-                  ? "bg-[var(--theme-3)]" 
-                  : "bg-[var(--theme-5)] text-[var(--theme-1)]"
-              } ${index % 2 === 1 ? "md:order-2" : ""}`}>
-                <h3 className="text-xl md:text-2xl font-bold mb-4">{event.location}</h3>
-                <div className="space-y-2 text-base md:text-lg">
-                  <p><strong>Date</strong>: {event.date}</p>
-                  <p><strong>Time</strong>: {event.time}</p>
-                </div>
-                <div className="pt-4 space-y-3">
-                  <p className="font-semibold text-lg">Content:</p>
-                  <div className="space-y-2 text-sm md:text-base">
-                    <p><strong>Raptor Introduction</strong>: {event.content.intro}</p>
-                    <p><strong>Pro Performances</strong>: {event.content.performances}</p>
-                    <p><strong>Hands-On Experience</strong>: {event.content.experience}</p>
-                    <p><strong>Interactive Activities</strong>: {event.content.activities}</p>
+              <Card className={index % 2 === 1 ? "md:order-2 bg-primary text-primary-foreground" : ""}>
+                <CardHeader>
+                  <CardTitle className="text-2xl mb-4">{event.location}</CardTitle>
+                  <CardDescription className={index % 2 === 1 ? "text-primary-foreground/80" : ""}>
+                    <div className="flex items-center gap-2">
+                      <Calendar className="h-4 w-4" />
+                      {event.date}
+                    </div>
+                    <div className="flex items-center gap-2 mt-2">
+                      <Clock className="h-4 w-4" />
+                      {event.time}
+                    </div>
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div>
+                    <h4 className="font-semibold mb-2">Content:</h4>
+                    <div className="space-y-2 text-sm">
+                      <p>
+                        <strong>Raptor Introduction</strong>: {event.content.intro}
+                      </p>
+                      <p>
+                        <strong>Pro Performances</strong>: {event.content.performances}
+                      </p>
+                      <p>
+                        <strong>Hands-On Experience</strong>: {event.content.experience}
+                      </p>
+                      <p>
+                        <strong>Interactive Activities</strong>: {event.content.activities}
+                      </p>
+                    </div>
                   </div>
-                </div>
-                <div className="pt-6">
-                  <Link href="#register" className={`btn ${
-                    index % 2 === 1 
-                      ? "btn-outline bg-[var(--theme-1)] text-[var(--theme-5)] border-[var(--theme-5)] hover:bg-[var(--theme-4)]" 
-                      : ""
-                  }`}>
-                    Register Now
-                  </Link>
-                </div>
-              </div>
-              <div className={`relative aspect-video rounded-xl overflow-hidden shadow-xl ${
-                index % 2 === 1 ? "md:order-1" : ""
-              }`}>
+                  <Button
+                    asChild
+                    variant={index % 2 === 1 ? "secondary" : "default"}
+                    className="mt-6"
+                  >
+                    <Link href="#register">Register Now</Link>
+                  </Button>
+                </CardContent>
+              </Card>
+              <div
+                className={`relative aspect-video rounded-xl overflow-hidden shadow-xl ${
+                  index % 2 === 1 ? "md:order-1" : ""
+                }`}
+              >
                 <Image
                   src={event.image}
                   alt={event.imageAlt}
