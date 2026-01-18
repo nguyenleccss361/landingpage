@@ -61,6 +61,7 @@ function extractWidgetId(apiKey: string, propertyId: string): string {
 export default function TawkTo() {
   const [isWidgetLoaded, setIsWidgetLoaded] = useState(false);
   const [showFallback, setShowFallback] = useState(false);
+  const [loadTimeout, setLoadTimeout] = useState(false);
 
   useEffect(() => {
     // Check if Tawk.to widget is already loaded
@@ -72,8 +73,19 @@ export default function TawkTo() {
       }
     }, 500);
 
-    return () => clearInterval(checkWidgetLoaded);
-  }, []);
+    // Show fallback if widget doesn't load within 10 seconds
+    const timeout = setTimeout(() => {
+      if (!isWidgetLoaded) {
+        setLoadTimeout(true);
+        setShowFallback(true);
+      }
+    }, 10000);
+
+    return () => {
+      clearInterval(checkWidgetLoaded);
+      clearTimeout(timeout);
+    };
+  }, [isWidgetLoaded]);
 
   useEffect(() => {
     // Determine Widget ID: use explicit Widget ID, or extract from JavaScript API Key
@@ -180,7 +192,10 @@ export default function TawkTo() {
 
   // Show fallback chat button if credentials aren't configured or widget isn't loaded yet
   const widgetId = TAWK_WIDGET_ID || (TAWK_JAVASCRIPT_API_KEY ? extractWidgetId(TAWK_JAVASCRIPT_API_KEY, TAWK_PROPERTY_ID) : "");
-  if (showFallback || (!isWidgetLoaded && !TAWK_PROPERTY_ID)) {
+  
+  // Always show fallback button initially, hide it when widget loads
+  // This ensures users always see a chat button
+  if (showFallback || !isWidgetLoaded || !TAWK_PROPERTY_ID || loadTimeout) {
     return (
       <div className="fixed bottom-4 right-4 md:bottom-6 md:right-6 z-[9999]">
         <button
@@ -188,17 +203,16 @@ export default function TawkTo() {
             // Try to open Tawk.to widget if available
             if (window.Tawk_API?.showWidget) {
               window.Tawk_API.showWidget();
+            } else if (window.Tawk_API?.toggle) {
+              window.Tawk_API.toggle();
             } else {
               // Fallback: open contact page or show setup message
               alert(
-                "Tawk.to chat widget is not configured yet.\n\n" +
-                "To set it up:\n" +
-                "1. Sign up at https://www.tawk.to/\n" +
-                "2. Get your Property ID and JavaScript API Key\n" +
-                "3. Add them to .env.local file:\n" +
-                "   NEXT_PUBLIC_TAWK_PROPERTY_ID=your_property_id\n" +
-                "   NEXT_PUBLIC_TAWK_JAVASCRIPT_API_KEY=your_api_key\n\n" +
-                "See QUICK_SETUP.md for detailed instructions."
+                "Tawk.to chat widget is loading...\n\n" +
+                "If this message persists, please check:\n" +
+                "1. Environment variables are set in Vercel\n" +
+                "2. Property ID: " + (TAWK_PROPERTY_ID || "Not set") + "\n" +
+                "3. Widget ID: " + (widgetId || "Not set")
               );
             }
           }}
@@ -215,7 +229,7 @@ export default function TawkTo() {
     );
   }
 
-  return null; // Tawk.to widget handles its own UI
+  return null; // Tawk.to widget handles its own UI when loaded
 }
 
 // Extend Window interface for TypeScript
