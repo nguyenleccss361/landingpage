@@ -36,8 +36,27 @@ import { MessageCircle, X } from "lucide-react";
 
 // Get Tawk.to credentials from environment variables
 // Set these in your .env.local file (see .env.local.example)
+// Option 1: Use Property ID + Widget ID (traditional method)
+// Option 2: Use Property ID + JavaScript API Key (newer method)
 const TAWK_PROPERTY_ID = process.env.NEXT_PUBLIC_TAWK_PROPERTY_ID || "";
 const TAWK_WIDGET_ID = process.env.NEXT_PUBLIC_TAWK_WIDGET_ID || "";
+const TAWK_JAVASCRIPT_API_KEY = process.env.NEXT_PUBLIC_TAWK_JAVASCRIPT_API_KEY || "";
+
+// Helper function to extract Widget ID from JavaScript API key or embed URL
+function extractWidgetId(apiKey: string, propertyId: string): string {
+  // If API key looks like a URL (e.g., https://embed.tawk.to/PROPERTY_ID/WIDGET_ID)
+  if (apiKey.includes("embed.tawk.to")) {
+    const match = apiKey.match(/embed\.tawk\.to\/([^\/]+)\/([^\/\s"']+)/);
+    if (match && match[2]) {
+      return match[2];
+    }
+  }
+  // If API key is just the widget ID
+  if (apiKey && !apiKey.includes("http") && apiKey.length > 0) {
+    return apiKey;
+  }
+  return "";
+}
 
 export default function TawkTo() {
   const [isWidgetLoaded, setIsWidgetLoaded] = useState(false);
@@ -57,25 +76,46 @@ export default function TawkTo() {
   }, []);
 
   useEffect(() => {
-    // Don't load if credentials are not configured
-    if (!TAWK_PROPERTY_ID || !TAWK_WIDGET_ID) {
+    // Determine Widget ID: use explicit Widget ID, or extract from JavaScript API Key
+    const widgetId = TAWK_WIDGET_ID || (TAWK_JAVASCRIPT_API_KEY ? extractWidgetId(TAWK_JAVASCRIPT_API_KEY, TAWK_PROPERTY_ID) : "");
+    
+    // Don't load if Property ID is not configured
+    if (!TAWK_PROPERTY_ID) {
       console.warn(
-        "Tawk.to: Property ID and Widget ID not configured. " +
-        "Please set NEXT_PUBLIC_TAWK_PROPERTY_ID and NEXT_PUBLIC_TAWK_WIDGET_ID in your .env.local file"
+        "Tawk.to: Property ID not configured. " +
+        "Please set NEXT_PUBLIC_TAWK_PROPERTY_ID in your .env.local file"
       );
       setShowFallback(true);
       return;
+    }
+
+    // If no Widget ID found, try to use Property ID only (some Tawk.to setups work this way)
+    if (!widgetId) {
+      console.warn(
+        "Tawk.to: Widget ID not found. " +
+        "Please set NEXT_PUBLIC_TAWK_WIDGET_ID or NEXT_PUBLIC_TAWK_JAVASCRIPT_API_KEY in your .env.local file. " +
+        "Attempting to load with Property ID only..."
+      );
+      // Continue anyway - some Tawk.to configurations work with just Property ID
     }
 
     // Prevent multiple script loads
     if (window.Tawk_API) {
       return;
     }
-
+    
     // Create script element
     const script = document.createElement("script");
     script.async = true;
-    script.src = `https://embed.tawk.to/${TAWK_PROPERTY_ID}/${TAWK_WIDGET_ID}`;
+    
+    // Build embed URL: if widgetId exists, use it; otherwise try Property ID only
+    if (widgetId) {
+      script.src = `https://embed.tawk.to/${TAWK_PROPERTY_ID}/${widgetId}`;
+    } else {
+      // Fallback: some Tawk.to setups work with just Property ID
+      script.src = `https://embed.tawk.to/${TAWK_PROPERTY_ID}`;
+    }
+    
     script.charset = "UTF-8";
     script.setAttribute("crossorigin", "*");
 
@@ -136,10 +176,11 @@ export default function TawkTo() {
       // Optional: Remove script on unmount if needed
       // Note: Usually you want to keep Tawk.to loaded
     };
-  }, [TAWK_PROPERTY_ID, TAWK_WIDGET_ID]);
+  }, [TAWK_PROPERTY_ID, TAWK_WIDGET_ID, TAWK_JAVASCRIPT_API_KEY]);
 
   // Show fallback chat button if credentials aren't configured or widget isn't loaded yet
-  if (showFallback || (!isWidgetLoaded && (!TAWK_PROPERTY_ID || !TAWK_WIDGET_ID))) {
+  const widgetId = TAWK_WIDGET_ID || (TAWK_JAVASCRIPT_API_KEY ? extractWidgetId(TAWK_JAVASCRIPT_API_KEY, TAWK_PROPERTY_ID) : "");
+  if (showFallback || (!isWidgetLoaded && !TAWK_PROPERTY_ID)) {
     return (
       <div className="fixed bottom-4 right-4 md:bottom-6 md:right-6 z-[9999]">
         <button
@@ -153,8 +194,10 @@ export default function TawkTo() {
                 "Tawk.to chat widget is not configured yet.\n\n" +
                 "To set it up:\n" +
                 "1. Sign up at https://www.tawk.to/\n" +
-                "2. Get your Property ID and Widget ID\n" +
-                "3. Add them to .env.local file\n\n" +
+                "2. Get your Property ID and JavaScript API Key\n" +
+                "3. Add them to .env.local file:\n" +
+                "   NEXT_PUBLIC_TAWK_PROPERTY_ID=your_property_id\n" +
+                "   NEXT_PUBLIC_TAWK_JAVASCRIPT_API_KEY=your_api_key\n\n" +
                 "See QUICK_SETUP.md for detailed instructions."
               );
             }
