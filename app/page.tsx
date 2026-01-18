@@ -15,7 +15,7 @@ export default function Home() {
     name: "Scaters",
     description: "Scaters—Where Passion Meets Performance. Premium skateboard manufacturer.",
     url: "https://scaters.com",
-    logo: "https://scaters.com/images/logos/logo.png",
+    logo: "https://scaters.com/logo.jpg",
     sameAs: [],
     contactPoint: {
       "@type": "ContactPoint",

@@ -23,7 +23,7 @@ export default function Header() {
       <div className="container flex h-16 items-center justify-between px-4">
         <Link href="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
           <Image
-            src="/images/logos/logo.png"
+            src="/logo.jpg"
             alt="Scaters Logo"
             width={40}
             height={45}

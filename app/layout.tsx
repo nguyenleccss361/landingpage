@@ -13,6 +13,10 @@ export const metadata: Metadata = {
   description: "Discover Raptor X: The Ultimate Skateboard from Scaters. Join the Raptor Roadshow 2025 and experience premium skateboarding with our limited-edition boards. 20% OFF - Only £177.",
   keywords: ["skateboard", "skateboarding", "raptor x", "scaters", "skateboard UK", "skateboard deck", "skateboard wheels"],
   authors: [{ name: "Scaters" }],
+  icons: {
+    icon: "/logo.jpg",
+    apple: "/logo.jpg",
+  },
   openGraph: {
     title: "Scaters—Where Passion Meets Performance.",
     description: "Discover Raptor X: The Ultimate Skateboard from Scaters—Unleash Your Urban Adventure",
@@ -20,7 +24,7 @@ export const metadata: Metadata = {
     siteName: "Scaters",
     images: [
       {
-        url: "/images/logos/logo.png",
+        url: "/logo.jpg",
         width: 574,
         height: 652,
         alt: "Scaters Logo",
@@ -33,7 +37,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Scaters—Where Passion Meets Performance.",
     description: "Discover Raptor X: The Ultimate Skateboard from Scaters",
-    images: ["/images/logos/logo.png"],
+    images: ["/logo.jpg"],
   },
   robots: {
     index: true,

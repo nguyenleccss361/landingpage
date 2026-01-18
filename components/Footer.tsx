@@ -19,7 +19,7 @@ export default function Footer() {
           <div className="space-y-4">
             <div className="flex items-center gap-3">
               <Image
-                src="/images/logos/logo.png"
+                src="/logo.jpg"
                 alt="Scaters Logo"
                 width={60}
                 height={68}
