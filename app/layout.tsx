@@ -10,7 +10,7 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: "Scaters—Where Passion Meets Performance.",
-  description: "Discover Raptor X: The Ultimate Skateboard from Scaters. Join the Raptor Roadshow 2025 and experience premium skateboarding with our limited-edition boards. 20% OFF - Only £177.",
+  description: "Discover Raptor X: The Ultimate Skateboard from Scaters. Join the Raptor Roadshow 2026 and experience premium skateboarding with our limited-edition boards. 20% OFF - Only £177.",
   keywords: ["skateboard", "skateboarding", "raptor x", "scaters", "skateboard UK", "skateboard deck", "skateboard wheels"],
   authors: [{ name: "Scaters" }],
   icons: {

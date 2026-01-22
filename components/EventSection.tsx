@@ -11,7 +11,7 @@ export default function EventSection() {
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div className="space-y-6">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold">
-              &ldquo;Raptor Roadshow 2025: The Ultimate Skateboarding Experience&rdquo;
+              &ldquo;Raptor Roadshow 2026: The Ultimate Skateboarding Experience&rdquo;
             </h2>
             <div className="space-y-4">
               <p className="text-lg font-semibold">Test the Raptor Skateboard and skateboarding contest</p>
@@ -34,11 +34,11 @@ export default function EventSection() {
               <CardContent>
                 <div className="space-y-4">
                   {[
-                    { date: "April 7, 2025", location: "London Hyde Park" },
-                    { date: "April 8, 2025", location: "Manchester Platt Fields Park" },
-                    { date: "April 9, 2025", location: "Birmingham The Wheels Adventure Park" },
-                    { date: "April 10, 2025", location: "Greenwich-Victoria Park" },
-                    { date: "April 11, 2025", location: "Liverpool-Wavertree Playground" },
+                    { date: "April 7, 2026", location: "London Hyde Park" },
+                    { date: "April 8, 2026", location: "Manchester Platt Fields Park" },
+                    { date: "April 9, 2026", location: "Birmingham The Wheels Adventure Park" },
+                    { date: "April 10, 2026", location: "Greenwich-Victoria Park" },
+                    { date: "April 11, 2026", location: "Liverpool-Wavertree Playground" },
                   ].map((event, idx) => (
                     <div key={idx} className="flex items-start gap-4 pb-4 border-b last:border-0">
                       <Calendar className="h-5 w-5 mt-0.5 text-muted-foreground" />

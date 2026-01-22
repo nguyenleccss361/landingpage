@@ -60,7 +60,7 @@ export default function ContactForm() {
           <CardHeader>
             <CardTitle className="text-3xl md:text-4xl text-center">REGISTER HERE!</CardTitle>
             <CardDescription className="text-center">
-              Join us for the Raptor Roadshow 2025
+              Join us for the Raptor Roadshow 2026
             </CardDescription>
           </CardHeader>
           <CardContent>

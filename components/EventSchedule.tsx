@@ -7,7 +7,7 @@ import { Calendar, Clock, MapPin } from "lucide-react";
 const events = [
   {
     location: "London-Hyde Park",
-    date: "Monday, April 7, 2025",
+    date: "Monday, April 7, 2026",
     time: "10:00 AM – 4:30 PM",
     content: {
       intro: "Launch of the product and key features.",
@@ -20,7 +20,7 @@ const events = [
   },
   {
     location: "Manchester Platt Fields Park",
-    date: "Tuesday, April 8, 2025",
+    date: "Tuesday, April 8, 2026",
     time: "10:00 AM – 4:30 PM",
     content: {
       intro: "Launch of the product and key features.",
@@ -33,7 +33,7 @@ const events = [
   },
   {
     location: "Birmingham-The Wheels Adventure Park",
-    date: "Wednesday, April 9, 2025",
+    date: "Wednesday, April 9, 2026",
     time: "10:00 AM – 4:30 PM",
     content: {
       intro: "Product demonstration and features.",
@@ -46,7 +46,7 @@ const events = [
   },
   {
     location: "Greenwich-Victoria Park",
-    date: "Thursday, April 10, 2025",
+    date: "Thursday, April 10, 2026",
     time: "10:00 AM – 4:30 PM",
     content: {
       intro: "Brand launch and demo of key features.",
@@ -59,7 +59,7 @@ const events = [
   },
   {
     location: "Liverpool-Wavertree Playground",
-    date: "Friday, April 11, 2025",
+    date: "Friday, April 11, 2026",
     time: "10:00 AM – 4:30 PM",
     content: {
       intro: "Product launch and demonstration.",
@@ -77,7 +77,7 @@ export default function EventSchedule() {
     <section id="schedule" className="py-24 bg-muted/50">
       <div className="container px-4">
         <h2 className="text-center mb-12 text-3xl md:text-4xl lg:text-5xl font-bold">
-          Event Schedule Raptor Roadshow 2025: The Ultimate Skateboarding Experience
+          Event Schedule Raptor Roadshow 2026: The Ultimate Skateboarding Experience
         </h2>
         <div className="space-y-12">
           {events.map((event, index) => (
