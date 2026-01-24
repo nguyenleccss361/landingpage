@@ -7,7 +7,7 @@ import { Calendar, Clock, MapPin } from "lucide-react";
 const events = [
   {
     location: "London-Hyde Park",
-    date: "Monday, April 7, 2026",
+    date: "Tuesday, April 7, 2026",
     time: "10:00 AM – 4:30 PM",
     content: {
       intro: "Launch of the product and key features.",
@@ -20,7 +20,7 @@ const events = [
   },
   {
     location: "Manchester Platt Fields Park",
-    date: "Tuesday, April 8, 2026",
+    date: "Wednesday, April 8, 2026",
     time: "10:00 AM – 4:30 PM",
     content: {
       intro: "Launch of the product and key features.",
@@ -33,7 +33,7 @@ const events = [
   },
   {
     location: "Birmingham-The Wheels Adventure Park",
-    date: "Wednesday, April 9, 2026",
+    date: "Thursday, April 9, 2026",
     time: "10:00 AM – 4:30 PM",
     content: {
       intro: "Product demonstration and features.",
@@ -46,7 +46,7 @@ const events = [
   },
   {
     location: "Greenwich-Victoria Park",
-    date: "Thursday, April 10, 2026",
+    date: "Friday, April 10, 2026",
     time: "10:00 AM – 4:30 PM",
     content: {
       intro: "Brand launch and demo of key features.",
@@ -59,7 +59,7 @@ const events = [
   },
   {
     location: "Liverpool-Wavertree Playground",
-    date: "Friday, April 11, 2026",
+    date: "Saturday, April 11, 2026",
     time: "10:00 AM – 4:30 PM",
     content: {
       intro: "Product launch and demonstration.",
